@@ -4,22 +4,22 @@ class Config(object):
     # Audio-_edit_bot client Config 
     API_ID = os.getenv("API_ID", "21740783")
     API_HASH = os.getenv("API_HASH", "a5dc7fec8302615f5b441ec5e238cd46")
-    BOT_TOKEN = os.getenv("BOT_TOKEN", "")
+    BOT_TOKEN = os.getenv("BOT_TOKEN", "8192707394:AAF-K6A1N9Rz1dKJH3nrVTr6GZTOkJ9g2Nc")
     
     # Database config
-    DB_NAME = os.environ.get("DB_NAME", "Speedwolf1")     
-    DB_URL  = os.environ.get("DB_URL", "mongodb+srv://Speedwolf1:speedwolf24689@cluster0.rgfywsf.mongodb.net/")
+    DB_NAME = os.environ.get("DB_NAME", "boyrokey00")     
+    DB_URL  = os.environ.get("DB_URL", "mongodb+srv://boyrokey00:rajan123@cluster0.4fhuu.mongodb.net/")
     
     # Other configs
     BOT_UPTIME  = time.time()
-    DUMP_CHANNEL_ID = int(os.environ.get("DUMP_CHANNEL_ID", "-1002141223756"))
-    LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", "-1002141223756"))
+    DUMP_CHANNEL_ID = int(os.environ.get("DUMP_CHANNEL_ID", "0"))
+    LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL", "0"))
     START_PIC   = os.environ.get("START_PIC", "https://telegra.ph/file/feb6dd0a1cb8576943c0f.jpg")
     
     # Web response configuration     
     WEBHOOK = bool(os.environ.get("WEBHOOK", "True"))
     
-    ADMIN   = [6299192020, 5326198063]  # Closed the square bracket here
+    ADMIN   = [6693549185]  # Closed the square bracket here
     
 class Txt(object):
     
