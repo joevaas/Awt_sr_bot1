@@ -12,9 +12,6 @@ from helper.utils import progress_for_pyrogram
 from plugins.details import get_video_details
 from plugins.screenshot import take_screenshot
 from pyrogram.errors import MessageNotModified
-from plugins.stream_rem import clean_up
-from plugins.stream_rem import download_file, DATA
-from plugins.stream_rem import extract_audio, extract_subtitle
 from config import Config, Txt
 
 # Dictionary to store stream selection
@@ -241,7 +238,7 @@ async def handle_video(client, message: Message):
     
     # Process based on current mode
     if current_mode == "Remove Audio":
-        await download_file(client, message)
+        await stream_remove(client, message)
     elif current_mode == "Trim Video":
         await stream_remove(client, message)
     elif current_mode == "Merge Video+Audio":
@@ -307,10 +304,7 @@ async def merge_video_audio(client, message, new_name):
             '-i', video_path,  # Input video
             '-i', audio_path,  # Input audio
             '-c:v', 'copy',  # Copy video without re-encoding
-            '-c:a', 'copy',  # Encode audio to AAC
-            '-map', '0:v:0',  # Use first video stream from the input
-            '-map', '1:a:0',
-            '-pix_fmt', 'yuv420p',# Use audio from the new audio file
+            '-c:a', 'copy',  # Use audio from the new audio file
             output_path  # Output file
         ]
         
@@ -353,13 +347,7 @@ async def merge_video_audio(client, message, new_name):
             progress_args=("📤Uploading Your Video file...", uploader, time.time())
 
         )
-        await client.send_video(
-            chat_id=Config.DUMP_CHANNEL_ID,
-            caption=caption,
-            video=output_path,
-            thumb=thumbnail_path,
-            duration=duration
-        )
+        
         await uploader.delete()
     except Exception as e:
         await msg.edit(f"Error: {e}")
@@ -492,13 +480,7 @@ async def process_video(client, message, user_id):
         progress=progress_for_pyrogram,
         progress_args=("📤 Uploading your video file...", status_message, time.time())
     )
-    await client.send_video(
-            chat_id=Config.DUMP_CHANNEL_ID,
-            caption=caption,
-            video=output_file,
-            thumb=thumbnail_path,
-            duration=duration
-    )
+    
 
 # Ensure cleanup after upload
     os.remove(file_path)
