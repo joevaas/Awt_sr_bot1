@@ -4,7 +4,7 @@ class Config(object):
     # Audio-_edit_bot client Config 
     API_ID = os.getenv("API_ID", "21740783")
     API_HASH = os.getenv("API_HASH", "a5dc7fec8302615f5b441ec5e238cd46")
-    BOT_TOKEN = os.getenv("BOT_TOKEN", "8192707394:AAF-K6A1N9Rz1dKJH3nrVTr6GZTOkJ9g2Nc")
+    BOT_TOKEN = os.getenv("BOT_TOKEN", "8192707394:AAHfmOl3fVyHFoJg9HClv4rAZ507uw2mykM")
     
     # Database config
     DB_NAME = os.environ.get("DB_NAME", "boyrokey00")     
