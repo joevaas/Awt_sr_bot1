@@ -29,7 +29,7 @@ class Bot(Client):
             app = web.AppRunner(await web_server())
             await app.setup()
             bind_address = "0.0.0.0"
-            await web.TCPSite(app, bind_address, 8080).start()
+            await web.TCPSite(app, bind_address, 8050).start()
         print(f"{me.first_name} Iꜱ Sᴛᴀʀᴛᴇᴅ.....✨️")
         for id in Config.ADMIN:
             try: await self.send_message(id, f"**__{me.first_name}  Iꜱ Sᴛᴀʀᴛᴇᴅ.....✨️__**")                                
