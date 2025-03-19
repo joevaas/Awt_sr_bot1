@@ -443,16 +443,15 @@ async def process_video(client, message, user_id):
 
     # Run FFmpeg command
     process = await asyncio.create_subprocess_exec(
-        "ffmpeg",
-        "-i", file_path,
-        "-map", "0",
-        "-c", "copy",
-        "-map", "-0:d",
-        "-map", "-0:s",
-        *map_args,
-        "-bufsize", "10M",
-        output_file
-    )
+    "ffmpeg",
+    "-i", file_path,            # Input file
+    "-map", "0",                # Map all streams (video, audio, etc.)
+    "-map", "0:s?",             # Map subtitle streams if they exist
+    "-c", "copy",               # Copy streams without re-encoding
+    *map_args,                  # Additional arguments
+    "-bufsize", "10M",          # Buffer size
+    output_file                 # Output file
+)
 
     await process.communicate()
 
