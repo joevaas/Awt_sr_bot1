@@ -300,12 +300,16 @@ async def merge_video_audio(client, message, new_name):
     
     try:
         command = [
-            'ffmpeg', '-y',  # Overwrite without asking
-            '-i', video_path,  # Input video
-            '-i', audio_path,  # Input audio
-            '-c:v', 'copy',  # Copy video without re-encoding
-            '-c:a', 'copy',  # Use audio from the new audio file
-            output_path  # Output file
+            'ffmpeg', '-y',              # Overwrite without asking
+    '-i', video_path,            # Input video
+    '-i', audio_path,            # Input audio
+    '-c:v', 'copy',              # Copy video without re-encoding
+    '-c:a', 'copy',              # Use audio from the new audio file
+    '-c:s', 'copy',              # Copy subtitle stream(s) without re-encoding
+    '-map', '0:v',               # Map video from the first input (video file)
+    '-map', '1:a',               # Map audio from the second input (audio file)
+    '-map', '2:s?',              # Map subtitles from the video file (if available)
+    output_path  # Output file
         ]
         
         # Execute the FFmpeg command
@@ -446,7 +450,7 @@ async def process_video(client, message, user_id):
     "ffmpeg",
     "-i", file_path,            # Input file
     "-map", "0",                # Map all streams (video, audio, etc.)
-    "-map", "0:s?",             # Map subtitle streams if they exist
+    "-map", "1:s?",             # Map subtitle streams if they exist
     "-c", "copy",               # Copy streams without re-encoding
     *map_args,                  # Additional arguments
     "-bufsize", "10M",          # Buffer size
